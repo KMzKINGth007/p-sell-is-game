@@ -21,14 +21,13 @@ public class OrderController {
     public ResponseModel addOrder(@RequestBody OrderRequestModel request) {
         ResponseModel response = new ResponseModel();
         try {
-            // service
             response.setData(orderService.addOrder(request));
             response.setStatus("SUCCESS");
         } catch (Exception e) {
-            // handle exception
             response.setStatus("ERROR");
             response.setMessage(e.getMessage());
         }
         return response;
     }
 }
+

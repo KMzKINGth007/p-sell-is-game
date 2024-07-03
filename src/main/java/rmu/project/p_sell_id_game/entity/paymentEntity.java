@@ -12,24 +12,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "payment")
 public class paymentEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "payment_id")
     private Integer paymentId;
-    
-    @Column(name = "order_id")
-    private String orderId;
-
-    @Column(name = "payment_method_id")
-    private Integer paymentMethodId;
 
     @Column(name = "payment_date")
     private Date paymentDate;
 
-    @Column(name = "amount")
-    private Integer amount;
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
     public Integer getPaymentId() {
         return paymentId;
@@ -37,22 +31,6 @@ public class paymentEntity {
 
     public void setPaymentId(Integer paymentId) {
         this.paymentId = paymentId;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getPaymentMethodId() {
-        return paymentMethodId;
-    }
-
-    public void setPaymentMethodId(Integer paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
     }
 
     public Date getPaymentDate() {
@@ -63,11 +41,12 @@ public class paymentEntity {
         this.paymentDate = paymentDate;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
+
 }

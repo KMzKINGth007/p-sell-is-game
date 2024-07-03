@@ -13,7 +13,6 @@ import rmu.project.p_sell_id_game.model.OrderRequestModel;
 import rmu.project.p_sell_id_game.repository.OrderItemRepository;
 import rmu.project.p_sell_id_game.repository.OrderRepository;
 
-import java.time.LocalDate;
 
 @Service
 public class OrderService {
@@ -26,28 +25,27 @@ public class OrderService {
 
     @Transactional
     public Integer addOrder(OrderRequestModel request) {
-        Integer response = null;
-
         OrdersEntity orderEntity = new OrdersEntity();
         orderEntity.setUserDetailId(request.getUserDetailId());
+        orderEntity.setPaymentId(request.getPaymentId());
         orderEntity.setTotalAmount(request.getTotalAmount());
         orderEntity.setOrderDate(new Date());
 
         orderEntity = orderRepository.save(orderEntity);
-        
-        response = orderEntity.getOrderId();
+        Integer orderId = orderEntity.getOrderId();
 
-        if(null != orderEntity) {
-            OrderItemEntity orderItemEntity = new OrderItemEntity();
-            orderItemEntity.setOrderId(orderEntity.getOrderId());
-            orderItemEntity.setProductId(request.getProductId());
-            orderItemEntity.setQuantity(request.getQuantity());
-            orderItemEntity.setPrice(request.getPrice());
-            orderItemEntity.setStatus("1");
-
-            orderItemRepository.save(orderItemEntity);
+        if(orderEntity != null) {
+            for(OrderRequestModel.Item item : request.getItems()) {
+                OrderItemEntity orderItemEntity = new OrderItemEntity();
+                orderItemEntity.setOrderId(orderId);
+                orderItemEntity.setProductId(item.getProductId());
+                orderItemEntity.setQuantity(item.getQuantity());
+                orderItemEntity.setPrice(item.getPrice());
+                orderItemEntity.setStatus("1");
+                orderItemRepository.save(orderItemEntity);
+            }
         }
 
-        return response;
+        return orderId;
     }
 }

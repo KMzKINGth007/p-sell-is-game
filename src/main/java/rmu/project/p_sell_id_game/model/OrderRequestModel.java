@@ -1,22 +1,40 @@
 package rmu.project.p_sell_id_game.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class OrderRequestModel {
-    private Integer orderId;
     private Integer userDetailId;
+    private Integer paymentId;
     private BigDecimal totalAmount;
-    private Integer productId;
-    private Integer quantity;
-    private BigDecimal price;
-    private String status;
+    private List<Item> items;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+    // Getters and setters...
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public static class Item {
+        private Integer productId;
+        private Integer quantity;
+        private BigDecimal price;
+        public Integer getProductId() {
+            return productId;
+        }
+        public void setProductId(Integer productId) {
+            this.productId = productId;
+        }
+        public Integer getQuantity() {
+            return quantity;
+        }
+        public void setQuantity(Integer quantity) {
+            this.quantity = quantity;
+        }
+        public BigDecimal getPrice() {
+            return price;
+        }
+        public void setPrice(BigDecimal price) {
+            this.price = price;
+        }
+
+        // Getters and setters...
     }
 
     public Integer getUserDetailId() {
@@ -27,6 +45,14 @@ public class OrderRequestModel {
         this.userDetailId = userDetailId;
     }
 
+    public Integer getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
+
     public BigDecimal getTotalAmount() {
         return totalAmount;
     }
@@ -35,36 +61,11 @@ public class OrderRequestModel {
         this.totalAmount = totalAmount;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 }

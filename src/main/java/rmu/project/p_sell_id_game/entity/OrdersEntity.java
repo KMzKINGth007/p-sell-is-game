@@ -20,6 +20,8 @@ public class OrdersEntity {
     private Integer orderId;
     @Column(name = "user_detail_id")
     private Integer userDetailId;
+    @Column(name = "payment_id")
+    private Integer paymentId;
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
     @Column(name = "order_date")
@@ -56,5 +58,15 @@ public class OrdersEntity {
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    public Integer getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    
 
 }
