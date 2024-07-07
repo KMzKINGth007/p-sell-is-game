@@ -15,17 +15,23 @@ import jakarta.persistence.Table;
 public class OrdersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "orders_id")
     private Integer orderId;
+
     @Column(name = "user_detail_id")
     private Integer userDetailId;
+
     @Column(name = "payment_id")
     private Integer paymentId;
+
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
+
     @Column(name = "order_date")
     private Date orderDate;
+
+    @Column(name = "status")
+    private String status;
 
     public Integer getOrderId() {
         return orderId;
@@ -67,6 +73,11 @@ public class OrdersEntity {
         this.paymentId = paymentId;
     }
 
-    
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

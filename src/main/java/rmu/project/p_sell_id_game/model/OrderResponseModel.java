@@ -1,14 +1,26 @@
 package rmu.project.p_sell_id_game.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
-public class OrderRequestModel {
+public class OrderResponseModel {
+    private Integer orderId;
     private Integer userDetailId;
+    private String userName;
     private Integer paymentId;
     private BigDecimal totalAmount;
+    private Date orderDate;
     private String status;
-    private List<Item> items;
+    private List<OrderItem> items;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
     public Integer getUserDetailId() {
         return userDetailId;
@@ -16,6 +28,10 @@ public class OrderRequestModel {
 
     public void setUserDetailId(Integer userDetailId) {
         this.userDetailId = userDetailId;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public Integer getPaymentId() {
@@ -34,6 +50,14 @@ public class OrderRequestModel {
         this.totalAmount = totalAmount;
     }
 
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -42,18 +66,29 @@ public class OrderRequestModel {
         this.status = status;
     }
 
-    public List<Item> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 
-    public static class Item {
+    public static class OrderItem {
+        private Integer orderItemId;
         private Integer productId;
+        private Integer orderId;
         private Integer quantity;
         private BigDecimal price;
+        private String status;
+
+        public Integer getOrderItemId() {
+            return orderItemId;
+        }
+
+        public void setOrderItemId(Integer orderItemId) {
+            this.orderItemId = orderItemId;
+        }
 
         public Integer getProductId() {
             return productId;
@@ -61,6 +96,14 @@ public class OrderRequestModel {
 
         public void setProductId(Integer productId) {
             this.productId = productId;
+        }
+
+        public Integer getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(Integer orderId) {
+            this.orderId = orderId;
         }
 
         public Integer getQuantity() {
@@ -77,6 +120,14 @@ public class OrderRequestModel {
 
         public void setPrice(BigDecimal price) {
             this.price = price;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }
