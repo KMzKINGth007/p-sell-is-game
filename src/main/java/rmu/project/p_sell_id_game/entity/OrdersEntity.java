@@ -3,12 +3,7 @@ package rmu.project.p_sell_id_game.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
@@ -17,6 +12,10 @@ public class OrdersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
     private Integer orderId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_detail_id", insertable = false, updatable = false)
+    private UserDetailEntity userDetail;
 
     @Column(name = "user_detail_id")
     private Integer userDetailId;
@@ -33,6 +32,7 @@ public class OrdersEntity {
     @Column(name = "status")
     private String status;
 
+    // Getters and setters for all fields including userDetail
     public Integer getOrderId() {
         return orderId;
     }
@@ -47,6 +47,14 @@ public class OrdersEntity {
 
     public void setUserDetailId(Integer userDetailId) {
         this.userDetailId = userDetailId;
+    }
+
+    public UserDetailEntity getUserDetail() {
+        return userDetail;
+    }
+
+    public void setUserDetail(UserDetailEntity userDetail) {
+        this.userDetail = userDetail;
     }
 
     public Date getOrderDate() {

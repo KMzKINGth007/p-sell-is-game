@@ -3,6 +3,7 @@ package rmu.project.p_sell_id_game.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,20 @@ public class OrderController {
             List<OrderResponseModel> orders = orderService.getAllOrders();
             response.setData(orders);
             response.setStatus("SUCCESS");
+        } catch (Exception e) {
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    @DeleteMapping("/deleteOrder/{orderId}")
+    public ResponseModel deleteOrder(@PathVariable Integer orderId) {
+        ResponseModel response = new ResponseModel();
+        try {
+            orderService.deleteOrder(orderId);
+            response.setStatus("SUCCESS");
+            response.setMessage("Order deleted successfully");
         } catch (Exception e) {
             response.setStatus("ERROR");
             response.setMessage(e.getMessage());
