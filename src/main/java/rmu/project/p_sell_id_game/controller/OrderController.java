@@ -69,6 +69,25 @@ public class OrderController {
         return response;
     }
 
+    @GetMapping("/getOrdersByUserId/{userDetailId}")
+    public ResponseModel getOrdersByUserId(@PathVariable Integer userDetailId) {
+        ResponseModel response = new ResponseModel();
+        try {
+            List<OrderResponseModel> orders = orderService.getOrdersByUserId(userDetailId);
+            if (!orders.isEmpty()) {
+                response.setData(orders);
+                response.setStatus("SUCCESS");
+            } else {
+                response.setStatus("ERROR");
+                response.setMessage("No orders found for the given user ID");
+            }
+        } catch (Exception e) {
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
     @DeleteMapping("/deleteOrder/{orderId}")
     public ResponseModel deleteOrder(@PathVariable Integer orderId) {
         ResponseModel response = new ResponseModel();

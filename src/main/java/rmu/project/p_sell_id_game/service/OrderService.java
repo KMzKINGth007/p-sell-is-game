@@ -3,10 +3,6 @@ package rmu.project.p_sell_id_game.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import jakarta.transaction.Transactional;
 import rmu.project.p_sell_id_game.entity.OrdersEntity;
 import rmu.project.p_sell_id_game.entity.OrderItemEntity;
@@ -16,6 +12,10 @@ import rmu.project.p_sell_id_game.model.OrderResponseModel;
 import rmu.project.p_sell_id_game.repository.OrderItemRepository;
 import rmu.project.p_sell_id_game.repository.OrderRepository;
 import rmu.project.p_sell_id_game.repository.UserDetailRepository;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -111,6 +111,21 @@ public class OrderService {
             responseModel.setOrderDate(orderEntity.getOrderDate());
             responseModel.setStatus(orderEntity.getStatus());
 
+            return responseModel;
+        }).collect(Collectors.toList());
+    }
+
+    public List<OrderResponseModel> getOrdersByUserId(Integer userDetailId) {
+        List<OrdersEntity> orderEntities = orderRepository.findByUserDetailId(userDetailId);
+        return orderEntities.stream().map(orderEntity -> {
+            OrderResponseModel responseModel = new OrderResponseModel();
+            responseModel.setOrderId(orderEntity.getOrderId());
+            responseModel.setUserDetailId(orderEntity.getUserDetailId());
+            responseModel.setPaymentId(orderEntity.getPaymentId());
+            responseModel.setTotalAmount(orderEntity.getTotalAmount());
+            responseModel.setOrderDate(orderEntity.getOrderDate());
+            responseModel.setStatus(orderEntity.getStatus());
+
             UserDetailEntity userDetailEntity = userDetailRepository.findById(orderEntity.getUserDetailId()).orElse(null);
             if (userDetailEntity != null) {
                 OrderResponseModel.UserDetail userDetail = new OrderResponseModel.UserDetail();
@@ -144,7 +159,6 @@ public class OrderService {
 
     @Transactional
     public void deleteOrder(Integer orderId) {
-
         List<OrderItemEntity> orderItems = orderItemRepository.findByOrderId(orderId);
         if (!orderItems.isEmpty()) {
             orderItemRepository.deleteAll(orderItems);

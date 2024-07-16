@@ -38,6 +38,7 @@ public class LoginService {
 			
 			UserDetailEntity userDetailEntity = userDetailRepository.findByUserId(userEntity.getUserId());
 			if(null != userDetailEntity) {
+				response.setUserDetailId(userDetailEntity.getUserDetailId());
 				response.setFirstName(userDetailEntity.getFirstName());
 				response.setLastName(userDetailEntity.getLastName());
 				response.setAge(userDetailEntity.getAge());

@@ -7,5 +7,5 @@ import rmu.project.p_sell_id_game.entity.OrderItemEntity;
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
-    List<OrderItemEntity> findByOrderId(Integer orderId);
+    List<OrderItemEntity> findByOrderId(Integer orderDetailId);
 }
