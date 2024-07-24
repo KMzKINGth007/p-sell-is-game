@@ -1,15 +1,22 @@
 package rmu.project.p_sell_id_game.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import rmu.project.p_sell_id_game.model.OrderRequestModel;
 import rmu.project.p_sell_id_game.model.OrderResponseModel;
@@ -95,6 +102,80 @@ public class OrderController {
             orderService.deleteOrder(orderId);
             response.setStatus("SUCCESS");
             response.setMessage("Order deleted successfully");
+        } catch (Exception e) {
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+
+    @GetMapping(value = ("/saveOrderImg/{orderId}"), consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseModel saveOrderImage(@RequestParam("file") MultipartFile file, @PathVariable Integer orderId) {
+
+        ResponseModel response = new ResponseModel();
+
+        try {
+            response.setData(orderService.saveOrderImage(file, orderId));
+            response.setStatus("SUCCESS");
+        } catch (Exception e) {
+            // TODO: handle exception
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
+    }
+
+    @GetMapping("/getOrderImgByOrderId")
+    public ResponseModel getOrderImgByOrderId(@RequestParam(name = "orderId") Integer orderId) {
+        ResponseModel response = new ResponseModel();
+
+        try {
+            response.setData(orderService.getOrderImgByOrderId(orderId));
+            response.setStatus("SUCCESS");
+        } catch (Exception e) {
+            // TODO: handle exception
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
+    }
+
+
+    @GetMapping("/getImageByte")
+    public ResponseEntity<byte[]> getImageByte(@RequestParam(name = "fileName") String fileName)
+            throws IOException, DataFormatException {
+                
+            return ResponseEntity.ok(orderService.getImageByte(fileName));
+    }
+
+    @DeleteMapping(value = ("/deleteOrderImgByFileName"))
+    public ResponseModel deleteImgByFileName(@RequestParam(name = "fileName") String fileName) {
+
+        ResponseModel response = new ResponseModel();
+
+        try {
+            orderService.deleteImgByFileName(fileName);
+            response.setData("SUCCESS");
+            response.setStatus("SUCCESS");
+        } catch (Exception e) {
+            // TODO: handle exception
+            response.setStatus("ERROR");
+            response.setMessage(e.getMessage());
+        }
+
+        return response;
+    }
+
+     @PutMapping("/updateOrder/{orderId}") // Add the PUT mapping for updating order
+    public ResponseModel updateOrder(@PathVariable Integer orderId, @RequestBody OrderRequestModel request) {
+        ResponseModel response = new ResponseModel();
+        try {
+            orderService.updateOrder(request, orderId);
+            response.setStatus("SUCCESS");
+            response.setMessage("Order updated successfully");
         } catch (Exception e) {
             response.setStatus("ERROR");
             response.setMessage(e.getMessage());
