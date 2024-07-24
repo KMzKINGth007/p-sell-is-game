@@ -193,7 +193,7 @@ public class OrderService {
             String preFixNameFile = ImgUtils.genaratePrefixFile();
             String genarateFileName = ImgUtils.genarateFileName() + ImgUtils.subStrFileName(file.getOriginalFilename());
             String fileName = ImgUtils.concatStr(preFixNameFile, genarateFileName);
-            orderImg.setOrderImagePath(fileName);
+            orderImg.setOrderImageName(fileName);
             orderImg.setOrderImagePath(ImgUtils.getPathInput());
             orderImg.setOrderId(orderId);
             orderImg.setOrderImageData(ImgUtils.compressImage(file.getBytes()));

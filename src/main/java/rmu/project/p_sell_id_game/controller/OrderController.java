@@ -109,8 +109,7 @@ public class OrderController {
         return response;
     }
 
-
-    @GetMapping(value = ("/saveOrderImg/{orderId}"), consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = ("/saveOrderImg/{orderId}"), consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseModel saveOrderImage(@RequestParam("file") MultipartFile file, @PathVariable Integer orderId) {
 
         ResponseModel response = new ResponseModel();
@@ -143,12 +142,11 @@ public class OrderController {
         return response;
     }
 
-
     @GetMapping("/getImageByte")
     public ResponseEntity<byte[]> getImageByte(@RequestParam(name = "fileName") String fileName)
             throws IOException, DataFormatException {
-                
-            return ResponseEntity.ok(orderService.getImageByte(fileName));
+
+        return ResponseEntity.ok(orderService.getImageByte(fileName));
     }
 
     @DeleteMapping(value = ("/deleteOrderImgByFileName"))
@@ -169,7 +167,7 @@ public class OrderController {
         return response;
     }
 
-     @PutMapping("/updateOrder/{orderId}") // Add the PUT mapping for updating order
+    @PutMapping("/updateOrder/{orderId}") // Add the PUT mapping for updating order
     public ResponseModel updateOrder(@PathVariable Integer orderId, @RequestBody OrderRequestModel request) {
         ResponseModel response = new ResponseModel();
         try {
