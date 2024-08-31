@@ -8,6 +8,7 @@ public class OrderRequestModel {
     private Integer paymentId;
     private BigDecimal totalAmount;
     private String status;
+    private String descOrder;
     private List<Item> items;
 
     public Integer getUserDetailId() {
@@ -50,6 +51,14 @@ public class OrderRequestModel {
         this.items = items;
     }
 
+    public String getDescOrder() {
+        return descOrder;
+    }
+
+    public void setDescOrder(String descOrder) {
+        this.descOrder = descOrder;
+    }
+
     public static class Item {
         private Integer productId;
         private Integer quantity;
@@ -79,4 +88,5 @@ public class OrderRequestModel {
             this.price = price;
         }
     }
+
 }

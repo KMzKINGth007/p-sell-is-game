@@ -32,6 +32,9 @@ public class OrdersEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "desc_orders")
+    private String descOrder;
+
     // Getters and setters for all fields including userDetail
     public Integer getOrderId() {
         return orderId;
@@ -88,4 +91,13 @@ public class OrdersEntity {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getDescOrder() {
+        return descOrder;
+    }
+
+    public void setDescOrder(String descOrder) {
+        this.descOrder = descOrder;
+    }
+    
 }

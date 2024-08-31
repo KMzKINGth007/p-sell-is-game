@@ -49,6 +49,7 @@ public class OrderService {
         orderEntity.setTotalAmount(request.getTotalAmount());
         orderEntity.setOrderDate(new Date());
         orderEntity.setStatus(request.getStatus());
+        orderEntity.setDescOrder(request.getDescOrder());
 
         orderEntity = orderRepository.save(orderEntity);
         Integer orderId = orderEntity.getOrderId();
@@ -81,6 +82,7 @@ public class OrderService {
         responseModel.setTotalAmount(orderEntity.getTotalAmount());
         responseModel.setOrderDate(orderEntity.getOrderDate());
         responseModel.setStatus(orderEntity.getStatus());
+        responseModel.setDescOrder(orderEntity.getDescOrder());
 
         UserDetailEntity userDetailEntity = userDetailRepository.findById(orderEntity.getUserDetailId()).orElse(null);
         if (userDetailEntity != null) {
@@ -122,6 +124,7 @@ public class OrderService {
             responseModel.setTotalAmount(orderEntity.getTotalAmount());
             responseModel.setOrderDate(orderEntity.getOrderDate());
             responseModel.setStatus(orderEntity.getStatus());
+            responseModel.setDescOrder(orderEntity.getDescOrder());
 
             return responseModel;
         }).collect(Collectors.toList());
@@ -137,6 +140,7 @@ public class OrderService {
             responseModel.setTotalAmount(orderEntity.getTotalAmount());
             responseModel.setOrderDate(orderEntity.getOrderDate());
             responseModel.setStatus(orderEntity.getStatus());
+            responseModel.setDescOrder(orderEntity.getDescOrder());
 
             UserDetailEntity userDetailEntity = userDetailRepository.findById(orderEntity.getUserDetailId())
                     .orElse(null);
@@ -267,6 +271,7 @@ public class OrderService {
             orderEntity.setTotalAmount(request.getTotalAmount());
             orderEntity.setOrderDate(new Date());
             orderEntity.setStatus(request.getStatus());
+            orderEntity.setDescOrder(request.getDescOrder());
 
             orderRepository.save(orderEntity);
 

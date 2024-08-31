@@ -12,6 +12,7 @@ public class OrderResponseModel {
     private BigDecimal totalAmount;
     private Date orderDate;
     private String status;
+    private String descOrder;
     private List<OrderItem> items;
 
     public Integer getOrderId() {
@@ -68,6 +69,14 @@ public class OrderResponseModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDescOrder() {
+        return descOrder;
+    }
+
+    public void setDescOrder(String descOrder) {
+        this.descOrder = descOrder;
     }
 
     public List<OrderItem> getItems() {

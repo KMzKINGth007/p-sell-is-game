@@ -167,7 +167,7 @@ public class OrderController {
         return response;
     }
 
-    @PutMapping("/updateOrder/{orderId}") // Add the PUT mapping for updating order
+    @PutMapping("/updateOrder/{orderId}")
     public ResponseModel updateOrder(@PathVariable Integer orderId, @RequestBody OrderRequestModel request) {
         ResponseModel response = new ResponseModel();
         try {
